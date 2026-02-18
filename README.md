@@ -61,6 +61,28 @@ Cotton disease model:
 python disease_training.py --epochs 8 --fine-tune-epochs 2
 ```
 
+##Results
+
+High regression accuracy for irrigation prediction
+
+Accurate disease classification using transfer learning
+
+Reduced over-irrigation through AI-based recommendation
+
+Improved early-stage disease identification
+
+
+##Our system promotes:
+
+ Water conservation
+
+ Increased crop yield
+
+ Reduced economic loss
+
+ Sustainable agriculture
+
+
 ## Run App
 
 ```bash
