@@ -1,10 +1,10 @@
-# 🌱 Integrated Smart Irrigation & Crop Disease Prediction System
+# Integrated Smart Irrigation & Crop Disease Prediction System
 
-## 🚀 AI-Powered Precision Agriculture Platform
+## AI-Powered Precision Agriculture Platform
 
 ---
 
-## 📌 Overview
+## Overview
 
 The **Integrated Smart Irrigation & Crop Disease Prediction System** is an AI-driven agricultural decision-support platform designed to optimize irrigation practices and enable early crop disease detection. By leveraging deep learning and environmental data analysis, the system provides intelligent, real-time recommendations to improve water efficiency and crop health.
 
@@ -12,7 +12,7 @@ This project aims to promote sustainable farming through data-driven decision-ma
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Agriculture faces two major challenges:
 
@@ -27,7 +27,7 @@ There is a need for a scalable, AI-powered solution that can:
 
 ---
 
-## 💡 Proposed Solution
+## Proposed Solution
 
 Our system integrates:
 
@@ -39,19 +39,19 @@ Our system integrates:
 
 ### Key Components:
 
-### 🚿 Irrigation Prediction Model
+### Irrigation Prediction Model
 - Multi-layer Neural Network (Regression)
 - Predicts optimal water requirement (liters)
 - Uses feature scaling and nonlinear learning
 - Reduces over-irrigation and water wastage
 
-### 🌿 Crop Disease Detection Model
+### Crop Disease Detection Model
 - Transfer Learning using MobileNetV2
 - CNN-based image classification
 - Predicts disease type with confidence score
 - Enables early intervention
 
-### 📊 Web Dashboard
+### Web Dashboard
 - Built using Streamlit
 - Real-time prediction interface
 - Displays irrigation recommendation and disease analysis
@@ -59,7 +59,7 @@ Our system integrates:
 
 ---
 
-## 🏗 System Architecture
+## System Architecture
 Input Data
 ↓
 Environmental Parameters + Leaf Image
