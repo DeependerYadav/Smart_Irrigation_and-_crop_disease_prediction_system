@@ -86,7 +86,5 @@ Improved early-stage disease identification
 ## Run App
 
 ```bash
-python -m streamlit run app.py
+https://deependeryadav-smart-irrigation-and--crop-disease-pr-app-9jayzf.streamlit.app/
 ```
-
-Open: `http://localhost:8501`
