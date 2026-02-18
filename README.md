@@ -1,9 +1,75 @@
-# Smart Irrigation & Cotton Disease Prediction System
+# 🌱 Integrated Smart Irrigation & Crop Disease Prediction System
 
-This project has two AI modules:
+## 🚀 AI-Powered Precision Agriculture Platform
 
-1. Irrigation prediction (TensorFlow neural network regression)
-2. Cotton disease detection (EfficientNetB0 with MobileNetV2 fallback)
+---
+
+## 📌 Overview
+
+The **Integrated Smart Irrigation & Crop Disease Prediction System** is an AI-driven agricultural decision-support platform designed to optimize irrigation practices and enable early crop disease detection. By leveraging deep learning and environmental data analysis, the system provides intelligent, real-time recommendations to improve water efficiency and crop health.
+
+This project aims to promote sustainable farming through data-driven decision-making and smart automation.
+
+---
+
+## 🎯 Problem Statement
+
+Agriculture faces two major challenges:
+
+- **Inefficient Irrigation** – Traditional irrigation methods rely on fixed schedules rather than real-time environmental conditions, leading to water wastage.
+- **Late Disease Detection** – Crop diseases are often identified only after visible damage occurs, resulting in reduced yield and economic losses.
+
+There is a need for a scalable, AI-powered solution that can:
+
+- Optimize water usage
+- Detect crop diseases early
+- Improve overall agricultural productivity
+
+---
+
+## 💡 Proposed Solution
+
+Our system integrates:
+
+- Environmental parameters (soil moisture, temperature, humidity, rain forecast)
+- Crop type input
+- Leaf image analysis
+- Deep learning models
+- Interactive web dashboard
+
+### Key Components:
+
+### 🚿 Irrigation Prediction Model
+- Multi-layer Neural Network (Regression)
+- Predicts optimal water requirement (liters)
+- Uses feature scaling and nonlinear learning
+- Reduces over-irrigation and water wastage
+
+### 🌿 Crop Disease Detection Model
+- Transfer Learning using MobileNetV2
+- CNN-based image classification
+- Predicts disease type with confidence score
+- Enables early intervention
+
+### 📊 Web Dashboard
+- Built using Streamlit
+- Real-time prediction interface
+- Displays irrigation recommendation and disease analysis
+- Calculates water efficiency score
+
+---
+
+## 🏗 System Architecture
+Input Data
+↓
+Environmental Parameters + Leaf Image
+↓
+Machine Learning Models
+↓
+Prediction Output
+↓
+Streamlit Dashboard Interface
+
 
 ## Files
 
