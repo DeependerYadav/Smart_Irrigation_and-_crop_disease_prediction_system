@@ -1,0 +1,222 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2d6807f2-82a6-46b3-b230-2e2c2152245e",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5fca9879-f702-401f-8131-43c6975ff928",
+      "name": "Webhook",
+      "webhookId": "2d6807f2-82a6-46b3-b230-2e2c2152245e"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Role: You are the Smart Crop Manager AI. You monitor 3 fields and use your OpenWeatherMap Tool to make irrigation decisions.\n\nInstructions:\n\n1.Check Weather: Whenever the user asks for a status, use your tool to check the current weather for their city.\n\n2.Rain Logic: If the tool reports 'Rain', 'Drizzle', or 'Thunderstorm':\n\n*Inform the farmer that Field 1 (Smart Field) has automatically PAUSED irrigation to save water.\n\n*Warn them that Fields 2 and 3 (Traditional) are still running and wasting water.\n\n3.Dry Logic: If it is sunny or clear, state that all fields are irrigating as per the normal schedule.\n\n4.Multilingual Requirement: You MUST provide the final status update in both English and Hindi.\n\"IMPORTANT: Keep your entire response under 140 characters. Be extremely concise. Use only one sentence.\"\nOutput Example:\n[English]: Rain is detected. Field 1 Stopped. Fields 2 & 3 are wasting water.\n[Hindi]: बारिश की संभावना है। खेत 1 की सिंचाई रुक गई है। खेत 2 और 3 पानी बर्बाद कर रहे हैं।\n\n {{ $json.code }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4b89f2af-42a6-4354-aaff-4934277e441c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "cityName": "jaipur"
+      },
+      "type": "n8n-nodes-base.openWeatherMapTool",
+      "typeVersion": 1,
+      "position": [
+        400,
+        208
+      ],
+      "id": "dc6abcb4-248e-4b01-ba33-22aea1ea3148",
+      "name": "OpenWeatherMap",
+      "credentials": {
+        "openWeatherMapApi": {
+          "id": "ocgYsXBDXo5o7XbV",
+          "name": "OpenWeatherMap account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        736,
+        -16
+      ],
+      "id": "decd8639-081e-49b9-919e-40aee3e1191a",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.code }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "fbbaacce-f62c-4750-870e-2a3b7fdf0557",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "from": "+1 582 233 3889",
+        "to": "+91 8769471738",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "e5cfdc57-f68d-4c59-9d4b-ec92ab0e343b",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "qvdBYzfE9aAMnOu9",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3-flash-preview",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "713b0026-b8fd-4c9b-a892-2e6b08caf533",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "FHUqIUTDBwhh2Sl6",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenWeatherMap": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "860d1ce6-9a44-4a22-8043-dcf7317061b6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6be4d1baf8d5b6abf688f41f4bd62f157b637c418eb1f45b38085e8a640d3e40"
+  },
+  "id": "ysQ0tCaue17UKqb0",
+  "tags": []
+}
